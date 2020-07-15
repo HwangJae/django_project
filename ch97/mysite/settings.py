@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # shkim
     'bookmark.apps.BookmarkConfig',
     'blog.apps.BlogConfig',
 ]
@@ -69,6 +68,8 @@ TEMPLATES = [
         },
     },
 ]
+
+TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'template')]
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
