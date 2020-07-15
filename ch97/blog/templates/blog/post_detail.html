@@ -1,3 +1,27 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Django Blog List {% endblock %}
+
+{% block header %}
+ <header class="masthead" style="background-image: url({% static 'img/home-bg.jpg' %})">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1> 블로그 </h1>
+            <span class="subheading">블로그입니다</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+{% endblock %}
+
+{% block content %}
+
 <h2>{{ object.title }}</h2>
 
 <p>
@@ -21,3 +45,17 @@
     {{ object.content|linebreaks }}
 </div>
 
+<div>
+    <b>TAGS</b> <i class="fas fa-tag"></i>
+    {% load taggit_templatetags2_tags %}
+    {% get_tags_for_object object as "tags" %}
+    {% for tag in tags %}
+    <a href="{% url 'blog:tagged_object_list' tag.name %}">{{tag.name}}</a>
+    {% endfor %}
+    &emsp;
+    <a href="{%url 'blog:tag_cloud' %}"> <span class="btn btn-info btn-sm"> 태그다 </span> </a>
+</div>
+
+
+{% endblock %}
+{% block extra-script %}{% endblock %}

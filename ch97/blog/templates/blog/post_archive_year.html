@@ -1,12 +1,39 @@
-<h1>Post Archives for {{ year|date:"Y" }}</h1>
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Django Blog List {% endblock %}
+
+{% block header %}
+ <header class="masthead" style="background-image: url({% static 'img/home-bg.jpg' %})">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1> 블로그 </h1>
+            <span class="subheading">블로그입니다</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+{% endblock %}
+
+{% block content %}
+ <header class="masthead" style="background-image: url({% static 'img/home-bg.jpg' %})">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+              <h1>Post Archives for {{ year|date:"Y" }}</h1>
 
 <ul>
     {% for date in date_list %}
     <li style="display: inline;">
         <a href="{% url 'blog:post_month_archive' year|date:'Y' date|date:'b' %}">{{ date|date:"F" }}</a></li>
     {% endfor %}
-
-
 
 </ul>
 <br>
@@ -19,4 +46,7 @@
         {% endfor %}
     </ul>
 </div>
+{% endblock %}
+{% block extra-script %}{% endblock %}
+
 

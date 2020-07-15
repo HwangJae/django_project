@@ -5,7 +5,7 @@
 {% block title %} Django Bookmark List {% endblock %}
 
 {% block header %}
- <header class="masthead" style="background-image: url({% static 'img/home-bg.jpg' %})">
+ <header class="masthead" style="background-image: url({% static 'img/paeng.jpg' %})">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
@@ -22,9 +22,12 @@
 
 {% block content %}
  <div id="content">
-
-    <h1>Bookmark List</h1>
-
+ <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-preview">
+          <a href="post.html">
+            <h1>북마크 리스트</h1>
     <ul>
         {% for bookmark in object_list %}
         <li> <a href="{% url 'bookmark:detail' bookmark.id %}">{{ bookmark }}</a> </li>
