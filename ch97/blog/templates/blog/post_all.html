@@ -23,33 +23,40 @@
 
 {% block content %}
 <!--포문을 돌면서-->
-{% for post in posts %}
+
  <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
         <div class="post-preview">
-          <a href="post.html">
-             <h1><a href='{{ post.get_absolute_url }}'>포스트 제목</a></h1>
+            {% for post in posts %}
+                 <h2><a href='{{ post.get_absolute_url }}'>{{ post.title }}</a></h2>
+<!--            <h2><a href='https://www.google.com'>{{ post.title }}</a></h2>-->
+                {{ post.modify_dt|date:"N d, Y" }}
+                 <p>{{ post.description }}</p>
+            {% endfor %}
 
-    {{ post.modify_dt|date:"N d, Y" }}
-    <p>{{ post.description }}</p>
-{% endfor %}
+        <div>
+            <span>
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}"> 이전페이지 </a>
+            {% endif %}
+
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}"> 다음페이지 </a>
+            {% endif %}
+            </span>
+        </div>
+       </div>
+      </div>
+    </div>
+ </div>
 
 
-<div>
-    <span>
-        {% if page_obj.has_previous %}
-            <a href="?page={{ page_obj.previous_page_number }}"> 이전페이지 </a>
-        {% endif %}
 
-        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
 
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}"> 다음페이지 </a>
-        {% endif %}
-    </span>
 
-</div>
 
 {% endblock %}
 {% block extra-script %}{% endblock %}
