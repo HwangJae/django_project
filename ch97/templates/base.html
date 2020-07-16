@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+<!--이거해야 static 폴더에 있는 것들 끍어올 수 있음.-->
 <html lang="en">
 
 <head>
@@ -29,11 +30,9 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand" href="index.html">Start Bootstrap</a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        Menu
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu</button>
         <i class="fas fa-bars"></i>
-      </button>
+
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
@@ -42,22 +41,73 @@
           <li class="nav-item">
             <a class="nav-link" href={% url 'bookmark:index' %}>Bookmark</a>
           </li>
-
+          <li class="nav-item">
+            <a class="nav-link" href={% url 'photo:index' %}>Photo</a>
+          </li>
           <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Blog
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href='{% url 'blog:index' %}'>Post</a>
-          <a class="dropdown-item" href='{% url 'blog:post_archive'%}'>Archive</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">test</a>
-        </div>
-      </li>
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Blog
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href='{% url 'blog:index' %}'>Post</a>
+              <a class="dropdown-item" href='{% url 'blog:post_archive' %}'>Archive</a>
+              <a class="dropdown-item" href='{% url 'blog:search' %}'>Search</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">test</a>
+            </div>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href={% url 'admin:index' %}>Admin</a>
           </li>
         </ul>
+<!--로그인 메뉴-->
+        <ul class="navbar-nav ml-5 mr-5">
+          <li class="nav-item dropdown">
+<!--[조건1] 로그인한 상태-->
+            {% if user.is_active %}
+            <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">
+<!--로그인한 사용자 이름 디스플레이-->
+              <i class="fas fa-user"></i>&ensp;{% firstof user.get_short_name user.get_username %}&ensp;</a>
+<!--드롭다운메뉴-->
+          <div class="dropdown-menu">
+              <a class="dropdown-item" href="{% url 'logout' %}">로그아웃</a>
+              <a class="dropdown-item" href="{% url 'password_change' %}">비밀번호</a>
+          </div>
+<!--[조건2] 로그아웃한 상태-->
+            {% else %}
+              <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">
+                <i class="fas fa-user"></i>&ensp;로그인해주세요&ensp;</a>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="{% url 'login' %}">로그인</a>
+                  <a class="dropdown-item" href="{% url 'register' %}">회원가입</a>
+                </div>
+            {% endif %}
+          </li>
+        </ul>
+         <li class = "nav-item dropdown mx-1 btn btn-primary">
+    <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">Add</a>
+
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="{% url 'bookmark:add' %}">Bookmark</a>
+      <a class="dropdown-item" href="{% url 'blog:add' %}">Post</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="">Album</a>
+      <a class="dropdown-item" href="">Photo</a>
+    </div>
+  </li>
+
+  <li class="nav-item dropdown mx-1 btn btn-primary">
+    <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">Change</a>
+
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="{% url 'bookmark:change' %}">Bookmark</a>
+      <a class="dropdown-item" href="{% url 'blog:change' %}">Post</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="">Album</a>
+      <a class="dropdown-item" href="">Photo</a>
+    </div>
+  </li>
+
       </div>
     </div>
   </nav>

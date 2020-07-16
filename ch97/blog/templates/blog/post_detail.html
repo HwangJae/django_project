@@ -5,64 +5,64 @@
 {% block title %} Django Blog List {% endblock %}
 
 {% block header %}
- <header class="masthead" style="background-image: url({% static 'img/home-bg.jpg' %})">
+<header class="masthead" style="background-image: url({% static 'img/post-bg.jpg' %})">
     <div class="overlay"></div>
     <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          <div class="site-heading">
-            <h1> 블로그 </h1>
-            <span class="subheading">블로그입니다</span>
-          </div>
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <h1> 블로그 </h1>
+                    <span class="subheading">블로그입니다</span>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </header>
+</header>
 {% endblock %}
 
 {% block content %}
 
-  <div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto">
+<div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
         <div class="post-preview">
             <h2>{{ object.title }}</h2>
 
 
-<p>
-    {% if object.get_previous %}
-    <a href="{{ object.get_previous.get_absolute_url }}" title="View previous post">
-        &laquo; -- {{ object.get_previous }}
-    </a>
-    {% endif %}
+            <p>
+                {% if object.get_previous %}
+                <a href="{{ object.get_previous.get_absolute_url }}" title="View previous post">
+                    &laquo; -- {{ object.get_previous }}
+                </a>
+                {% endif %}
 
-    {% if object.get_next %}
-    | <a href="{{ object.get_next.get_absolute_url }}" title="View next post">
-    {{ object.get_next }} -- &&raquo;
-    </a>
-    {% endif %}
-</p>
+                {% if object.get_next %}
+                | <a href="{{ object.get_next.get_absolute_url }}" title="View next post">
+                {{ object.get_next }} -- &&raquo;
+            </a>
+                {% endif %}
+            </p>
 
-<p>{{ object.modify_dt|date:"j F Y" }}</p>
-<br>
+            <p>{{ object.modify_dt|date:"j F Y" }}</p>
+            <br>
 
-     <div>
-    {{ object.content|linebreaks }}
-      </div>
+            <div>
+                {{ object.content|linebreaks }}
+            </div>
 
-    <div>
-    <b>TAGS</b> <i class="fas fa-tag"></i>
-    {% load taggit_templatetags2_tags %}
-    {% get_tags_for_object object as "tags" %}
-    {% for tag in tags %}
-    <a href="{% url 'blog:tagged_object_list' tag.name %}">{{tag.name}}</a>
-    {% endfor %}
-    &emsp;
-    <a href="{%url 'blog:tag_cloud' %}"> <span class="btn btn-info btn-sm"> 여기는 뭐써야하지?? </span> </a>
-    </div>
+            <div>
+                <b>TAGS</b> <i class="fas fa-tag"></i>
+                {% load taggit_templatetags2_tags %}
+                {% get_tags_for_object object as "tags" %}
+                {% for tag in tags %}
+                <a href="{% url 'blog:tagged_object_list' tag.name %}">{{tag.name}}</a>
+                {% endfor %}
+                &emsp;
+                <a href="{%url 'blog:tag_cloud' %}"> <span class="btn btn-info btn-sm"> 여기는 뭐써야하지?? </span> </a>
+            </div>
 
         </div>
-      </div>
-  </div>
+    </div>
+</div>
 <br>
 <div id='disqus_thread"></div>
 {% endblock %}
@@ -77,15 +77,15 @@
 
 var disqus_config = function () {
     this.page.identifier = '{{disqus_id}}';
-    this.page.url = '{{disqus_url}}';
-    this.page.title = '{{ disqus_title }}';
+this.page.url = '{{disqus_url}}';
+this.page.title = '{{ disqus_title }}';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
-    var d = document, s = d.createElement('script');
-    s.src = 'https://hwang137-django.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
+var d = document, s = d.createElement('script');
+s.src = 'https://hwang137-django.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
 })();
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
