@@ -6,13 +6,13 @@ app_name = 'blog'
 urlpatterns = [
 
     # Example: /blog/
-    path('', views.PostLV.as_view(), name='index'),
+    path('', views.PostLV.as_view(), name='index'),  #  post list view
 
     # Example: /blog/post/ (same as /blog/)
     path('post/', views.PostLV.as_view(), name='post_list'),
 
     # Example: /blog/post/django-example/
-    re_path(r'^post/(?P<slug>[-\w]+)/$', views.PostDV.as_view(), name='post_detail'),
+    re_path(r'^post/(?P<slug>[-\w]+)/$', views.PostDV.as_view(), name='post_detail'),  #  post  detail  view
 
     # Example: /blog/archive/
     path('archive/', views.PostAV.as_view(), name='post_archive'),
@@ -28,8 +28,9 @@ urlpatterns = [
 
     # Example: /blog/archive/today/
     path('archive/today/', views.PostTAV.as_view(), name='post_today_archive'),
+#      아카이브 url 설정 여기까지
 
-    path('archive/today/', views.PostTAV.as_view(), name = 'post_today_archive'),
+
 
     path('tag/',views.TagCloudTV.as_view(), name='tag_cloud'),
 

@@ -31,7 +31,7 @@ class BookmarkChangeLV(LoginRequiredMixin, ListView):
         return Bookmark.objects.filter(owner=self.request.user)
 
 class BookmarkUpdateView(OwnerOnlyMixin, UpdateView):
-    model = Bookmark
+    model = Bookmark   #  참고할 모델은 북마크
     fields = ['title', 'url']
     success_url = reverse_lazy('bookmark:index')
 

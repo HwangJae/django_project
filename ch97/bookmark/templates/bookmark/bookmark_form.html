@@ -8,12 +8,15 @@
     <h1>Bookmark Create/Update - {{user}}</h1>
     <p class="font-italic">This is a creation or update form for your bookmark.</p>
 
+
+<!-- 이프문으로 문제 생기면 wrong! ~ 나오도록 해줌-->
     {% if form.errors %}
     <div class="alert alert-danger">
         <div class="font-weight-bold">Wrong! Please correct the error(s) below.</div>
         {{ form.errors }}
     </div>
     {% endif %}
+
 
     <form action="." method="post" class="card pt-3">{% csrf_token %}
 
@@ -33,7 +36,7 @@
 
         <div class="form-group">
             <div class="offset-sm-2 col-sm-5">
-                <input type="submit" value="Submit" class="btn btn-info"/>
+                <input type="submit" value="제출" class="btn btn-info"/>
             </div>
         </div>
 
